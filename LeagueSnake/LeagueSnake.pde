@@ -6,22 +6,27 @@
 class Segment {
 
 //Add x and y member variables. They will hold the corner location of each segment of the snake.
-
+  int x;
+  int y;
 
 // Add a constructor with parameters to initialize each variable.
+  Segment(int x, int y, int segmentNum) {
+    this.x = x*10;
+    this.y = y*10;
+  }
+  
 
 
-
-}
 
 
 //*
 // ***** GAME VARIABLES *****
 // All the game variables that will be shared by the game methods are here
 //*
-
-
-
+  //ArrayList<Segment> tail = new ArrayList<Segment>();
+   new Segment head;
+   int foodX;
+   int foodY;
 
 
 //*
@@ -30,7 +35,7 @@ class Segment {
 //*
 
 void setup() {
-
+  size(1800, 1000);
 }
 
 void dropFood() {
@@ -66,13 +71,14 @@ void drawSnake() {
 
 void drawTail() {
   //Draw each segment of the tail 
-
+  //for
+   
 }
 
 void manageTail() {
   //After drawing the tail, add a new segment at the "start" of the tail and remove the one at the "end" 
   //This produces the illusion of the snake tail moving.
-  
+    
 }
 
 void checkTailCollision() {
@@ -123,4 +129,5 @@ void checkBoundaries() {
 void eat() {
   //When the snake eats the food, its tail should grow and more food appear
 
+}
 }
