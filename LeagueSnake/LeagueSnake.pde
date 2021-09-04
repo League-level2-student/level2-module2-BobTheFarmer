@@ -11,8 +11,8 @@ class Segment {
 
 // Add a constructor with parameters to initialize each variable.
   Segment(int x, int y) {
-    this.x = x*10;
-    this.y = y*10;
+    this.x = x;
+    this.y = y;
   }
 }
 
@@ -52,8 +52,8 @@ void setup() {
 
 void dropFood() {
   //Set the food in a new random location
-    foodX = (int)random(180);
-    foodY = (int)random(80);
+    foodX = (int)random(180)*10;
+    foodY = (int)random(80)*10;
 }
 
 
@@ -69,13 +69,17 @@ void draw() {
   drawSnake();
   drawFood();
   eat();
-  print("Snake Cords: " + head.x + ", " + head.y + ". Food Eaten: " + foodEaten + ". foodCords : " + foodX + ", " + foodY + "\n");
+ print("\n Tail Size: " + tail.size());
+ if(tail.size() > 0) {
+ print("\n Tail1 X/Y: " + tail.get(0).x + ", " + tail.get(0).y);
+ }
+ print("Snake Cords: " + head.x + ", " + head.y + "\n");
 }
 
 void drawFood() {
   //Draw the food
     fill(#F50C0C);
-    square(foodX*10, foodY*10, 10);
+    square(foodX, foodY, 10);
 }
 
 void drawSnake() {
@@ -91,7 +95,7 @@ void drawSnake() {
      
       }
       fill(snakeR, snakeG, snakeB);
-      square(head.x*10, head.y*10, 10); 
+      square(head.x, head.y, 10); 
       manageTail();
 }
 
@@ -104,7 +108,7 @@ void drawSnake() {
 void drawTail() {
   //Draw each segment of the tail 
   for(int i = 0; i<tail.size(); i++) {
-   square(tail.get(i).x*10, tail.get(i).y*10, 10);
+   square(tail.get(i).x, tail.get(i).y, 10);
   }
    
 }
@@ -144,16 +148,24 @@ void keyPressed() {
   //Set the direction of the snake according to the arrow keys pressed
     switch(keyCode) {
       case UP: 
+        if(snakeDirection != DOWN) {
         snakeDirection=UP;
+        }
         break;
        case DOWN: 
+        if(snakeDirection != UP) {
         snakeDirection=DOWN;
+        }
         break;
        case LEFT: 
+        if(snakeDirection != RIGHT) {
         snakeDirection=LEFT;
+        }
         break;
        case RIGHT: 
+        if(snakeDirection != LEFT) {
         snakeDirection=RIGHT;
+        }
         break;
     }
 }
@@ -165,17 +177,17 @@ void move() {
   switch(snakeDirection) {
   case UP:
     // move head up here 
-      head.y--;
+      head.y-=10;
     break;
   case DOWN:
     // move head down here 
-    head.y++;
+    head.y+=10;
     break;
   case LEFT:
-     head.x--;
+     head.x-=10;
     break;
   case RIGHT:
-    head.x++; 
+    head.x+=10; 
     break;
   }
   checkBoundaries();
@@ -185,18 +197,18 @@ void move() {
 void checkBoundaries() {
  //If the snake leaves the frame, make it reappear on the other side
    if(head.x<0) {
-     head.x=180;
+     head.x=width;
    }
    
-   if(head.x>180) {
+   if(head.x>width) {
       head.x=0;
    }
    
    if(head.y<0) {
-      head.y=80;
+      head.y=height;
    }
    
-   if(head.y>80) {
+   if(head.y>height) {
       head.y=0;
       
    }
